@@ -6,6 +6,17 @@ import random
 import schedule
 import time
 
+from flask import Flask, request, render_template, make_response, redirect, url_for
+app = Flask(__name__)
+
+@app.route('/')
+def my_form():
+    schedule.every().day.at("21:30").do(job)
+    while 1:
+        schedule.run_pending()
+    time.sleep(1)
+	return "working"
+
 def job():
     token = "b7885278fa80397a101f61daae366584aed3e3a4"
     filename = "README.md"
@@ -13,12 +24,6 @@ def job():
     branch = "master"
     push_to_github(filename, repo, branch, token)
     print("I'm working...")
-
-schedule.every().day.at("21:30").do(job)
-
-while 1:
-    schedule.run_pending()
-    time.sleep(1)
 
 def generate_string(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
@@ -49,4 +54,5 @@ def push_to_github(filename, repo, branch, token):
         print(resp)
     else:
         print("nothing to update")
-    
+if __name__ == '__main__':
+	app.run(debug=True, use_reloader=True)
