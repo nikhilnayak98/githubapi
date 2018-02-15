@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def my_form():
-	token = "b7885278fa80397a101f61daae366584aed3e3a4"
+	token = ""
 	filename = "README.md"
 	repo = "nikhilnayak98/gitcommitter"
 	branch = "master"
