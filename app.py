@@ -3,27 +3,18 @@ import base64
 import requests
 import string
 import random
-import schedule
-import time
 
 from flask import Flask, request, render_template, make_response, redirect, url_for
 app = Flask(__name__)
 
 @app.route('/')
 def my_form():
-    schedule.every().day.at("21:30").do(job)
-    while 1:
-        schedule.run_pending()
-    time.sleep(1)
+	token = "b7885278fa80397a101f61daae366584aed3e3a4"
+	filename = "README.md"
+	repo = "nikhilnayak98/gitcommitter"
+	branch = "master"
+	push_to_github(filename, repo, branch, token)
 	return "working"
-
-def job():
-    token = "b7885278fa80397a101f61daae366584aed3e3a4"
-    filename = "README.md"
-    repo = "nikhilnayak98/gitcommitter"
-    branch = "master"
-    push_to_github(filename, repo, branch, token)
-    print("I'm working...")
 
 def generate_string(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
