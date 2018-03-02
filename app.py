@@ -10,9 +10,9 @@ app = Flask(__name__)
 @app.route('/')
 def my_form():
 	token = ""
-	filename = "README.md"
-	repo = "nikhilnayak98/gitcommitter"
-	branch = "master"
+	filename = ""
+	repo = ""
+	branch = ""
 	push_to_github(filename, repo, branch, token)
 	return "working"
 
